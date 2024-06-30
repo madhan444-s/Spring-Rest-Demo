@@ -38,4 +38,21 @@ public class UserService {
             throw new RuntimeException("Failed to save user:"+ e.getMessage());
         }
     }
+
+    public  Optional<User> updateUser(Long id, User updateUser){
+        try{
+            Optional<User> existingOptionalUser = userRepository.findById(id);
+            if(existingOptionalUser.isPresent()){
+                User existingUser = existingOptionalUser.get();
+                existingUser.setName(updateUser.getName());
+                User savedUser = userRepository.save(existingUser);
+                return Optional.of(savedUser);
+            }else{
+                return  Optional.empty();
+            }
+
+        }catch (Exception e){
+            throw new RuntimeException("Failed to update product: " + e.getMessage());
+        }
+    }
 }

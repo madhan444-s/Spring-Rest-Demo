@@ -38,4 +38,12 @@ public class UserController {
         return ResponseEntity.ok(savedUser);
     }
 
+    @PutMapping("/{id}")
+    public  ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
+        Optional<User> updatedOptionalUser = userService.updateUser(id, user);
+        return  updatedOptionalUser.map(ResponseEntity::ok)
+                .orElseGet(()->ResponseEntity.notFound().build());
+
+    }
+
 }
