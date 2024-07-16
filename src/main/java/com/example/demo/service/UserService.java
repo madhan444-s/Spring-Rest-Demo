@@ -1,9 +1,11 @@
 package main.java.com.example.demo.service;
 
+
 import main.java.com.example.demo.entity.User;
 import main.java.com.example.demo.respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,10 +16,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
-
+    @Cacheable(value = "allUsersCache", key = "#root.methodName")
     public List<User> fetchAllUsers(){
         try {
               return userRepository.findAll();
