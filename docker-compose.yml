@@ -1,0 +1,24 @@
+version: '3'
+services:
+  app:
+    image: my-spring-boot-app
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/sample
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Admin@123
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: sample
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Admin@123
+      MYSQL_ROOT_PASSWORD: Admin@123
+    ports:
+      - "3306:3306"

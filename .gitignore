@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+###  Docker to start the app ###
+docker build -t my-spring-boot-app .
+
+### The -t flag tags your image with a name (my-spring-boot-app in this case).
+
+docker run -p 8080:8080 my-spring-boot-app
+### This maps port 8080 of your host machine to port 8080 of the Docker container,
+### allowing you to access your Spring Boot application at http://localhost:8080.
